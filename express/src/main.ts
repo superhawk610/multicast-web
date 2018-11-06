@@ -1,11 +1,14 @@
-import * as express from 'express';
-import * as cors from 'cors';
+import express = require('express');
+import cors = require('cors');
+
+import initDb from './lib/db';
+import { PORT } from './lib/config';
 
 import hostsRouter from './routes/hosts';
 
-const app = express();
+initDb();
 
-const PORT = process.env.PORT || 8080;
+const app = express();
 
 app.use(cors());
 app.use(express.json());

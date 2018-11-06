@@ -1,1 +1,8 @@
+# Node
 node_modules
+
+# TypeScript build
+ts-built
+
+# Storage
+src/lib/db/db.sqlite3
