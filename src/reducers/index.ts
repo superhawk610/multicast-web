@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import hosts, { HostsState } from './hosts.reducer';
+import hosts, { IHostsState } from './hosts.reducer';
 
-export interface ApplicationState {
-  hosts: HostsState;
+export interface IApplicationState {
+  hosts: IHostsState;
 }
 
 export default combineReducers({

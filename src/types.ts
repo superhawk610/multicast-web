@@ -1,11 +1,12 @@
 import { Action } from 'redux';
 
-export type IAPI = {
+export interface IAPI {
   path: string;
   method?: string;
-  response?: Array<any> | Object | null;
+  body?: {};
+  response?: any[] | {} | null;
   error?: Error | null;
-};
+}
 interface IAPIAction {
   api: IAPI;
 }

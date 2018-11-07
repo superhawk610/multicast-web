@@ -8,7 +8,9 @@ type APIMiddlewareNext = (a: APIAction) => void;
 const middleware = (store: Store) => (next: APIMiddlewareNext) => (
   action: APIAction,
 ) => {
-  if (!action.api) return next(action);
+  if (!action.api) {
+    return next(action);
+  }
 
   next(action);
 

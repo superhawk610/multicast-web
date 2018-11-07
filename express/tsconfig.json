@@ -4,6 +4,7 @@
     "target": "es6",
     "outDir": "ts-built",
     "rootDir": "src",
+    "inlineSourceMap": true,
     "noImplicitAny": true,
     "removeComments": true
   },

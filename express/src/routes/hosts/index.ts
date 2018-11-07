@@ -1,11 +1,29 @@
-import { Router, Response } from 'express';
+import { Request, Response, Router } from 'express';
+import { HostManager } from '../../models/Host';
 
 const router = Router();
 
-const hosts = [{ address: '1.1.1.1' }, { address: '2.2.2.2' }];
+router
+  .route('/')
+  .get((_, res: Response) =>
+    res.json(HostManager.all().map(m => m.serialize())),
+  )
+  .post((req: Request, res: Response) => {
+    const instance = req.body;
+    const model = HostManager.create(instance);
+    res.json(model.serialize());
+  });
 
-router.get('/', (_, res: Response) => {
-  res.json(hosts);
-});
+router
+  .route('/:id')
+  .get((req: Request, res: Response) =>
+    res.json(HostManager.findOne(req.params.id).serialize()),
+  )
+  .patch((req: Request, res: Response) => {
+    const model = HostManager.findOne(req.params.id);
+    model.update(req.body);
+    model.save();
+    res.json(model.serialize());
+  });
 
 export default router;

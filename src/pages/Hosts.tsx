@@ -1,27 +1,29 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { ApplicationState } from '../reducers';
-import { Host } from '../reducers/hosts.reducer';
+import Page from '../components/Page';
+
+import { IApplicationState } from '../reducers';
+import { IHost } from '../reducers/hosts.reducer';
 import * as actions from '../actions';
 
-export interface Props {
+export interface IProps {
   loading: boolean;
   error: Error | null;
-  hosts: Array<Host>;
+  hosts: IHost[];
   fetchHosts: typeof actions.fetchHosts;
 }
 
-class Hosts extends React.Component<Props> {
-  componentDidMount() {
+class Hosts extends React.Component<IProps> {
+  public componentDidMount() {
     this.props.fetchHosts();
   }
 
-  render() {
+  public render() {
     const { loading, error, hosts } = this.props;
 
     return (
-      <div>
+      <Page heading="Page Title" subheading="Page Subtitle">
         {loading ? (
           <div>Loading...</div>
         ) : error ? (
@@ -33,12 +35,12 @@ class Hosts extends React.Component<Props> {
             ))}
           </div>
         )}
-      </div>
+      </Page>
     );
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({
+const mapStateToProps = (state: IApplicationState) => ({
   loading: state.hosts.loading,
   error: state.hosts.error,
   hosts: state.hosts.data,

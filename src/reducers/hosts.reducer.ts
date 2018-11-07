@@ -6,13 +6,13 @@ import {
 
 import { APIAction } from '../types';
 
-export type Host = {
+export interface IHost {
   address: string;
-};
-export interface HostsState {
+}
+export interface IHostsState {
   loading: boolean;
   error: Error | null;
-  data: Array<Host>;
+  data: IHost[];
 }
 
 const initialState = {
@@ -21,7 +21,7 @@ const initialState = {
   data: [],
 };
 
-const reducer = (state: HostsState = initialState, action: APIAction) => {
+const reducer = (state: IHostsState = initialState, action: APIAction) => {
   switch (action.type) {
     case HOSTS_FETCH_BEGIN:
       return {
