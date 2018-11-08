@@ -20,3 +20,46 @@ export const COLORS = {
   purple: 'hsl(271,100%,71%)',
   red: 'hsl(348,100%,61%)',
 };
+
+// we need the namespace here to allow components
+// to specify which Themes they accept
+// tslint:disable-next-line:no-namespace
+export namespace Themes {
+  export type white = 'is-white';
+  export type light = 'is-light';
+  export type dark = 'is-dark';
+  export type black = 'is-black';
+  export type text = 'is-text';
+  export type primary = 'is-primary';
+  export type link = 'is-link';
+  export type info = 'is-info';
+  export type success = 'is-success';
+  export type warning = 'is-warning';
+  export type danger = 'is-danger';
+}
+
+export const THEMES: {
+  white: Themes.white;
+  light: Themes.light;
+  dark: Themes.dark;
+  black: Themes.black;
+  text: Themes.text;
+  primary: Themes.primary;
+  link: Themes.link;
+  info: Themes.info;
+  success: Themes.success;
+  warning: Themes.warning;
+  danger: Themes.danger;
+} = {
+  white: 'is-white',
+  light: 'is-light',
+  dark: 'is-dark',
+  black: 'is-black',
+  text: 'is-text',
+  primary: 'is-primary',
+  link: 'is-link',
+  info: 'is-info',
+  success: 'is-success',
+  warning: 'is-warning',
+  danger: 'is-danger',
+};

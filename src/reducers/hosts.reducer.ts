@@ -1,3 +1,4 @@
+import { keyBy } from '../utils';
 import {
   HOSTS_FETCH_BEGIN,
   HOSTS_FETCH_SUCCESS,
@@ -5,20 +6,23 @@ import {
 } from '../actions';
 
 import { APIAction } from '../types';
+import { IApplicationState } from './index';
 
 export interface IHost {
+  id: number;
   address: string;
+  nickname: string;
 }
 export interface IHostsState {
   loading: boolean;
   error: Error | null;
-  data: IHost[];
+  byId: { [id: string]: IHost };
 }
 
 const initialState = {
   loading: false,
   error: null,
-  data: [],
+  byId: {},
 };
 
 const reducer = (state: IHostsState = initialState, action: APIAction) => {
@@ -33,7 +37,7 @@ const reducer = (state: IHostsState = initialState, action: APIAction) => {
       return {
         ...state,
         loading: false,
-        data: action.api.response,
+        byId: keyBy(action.api.response as IHost[], 'id'),
       };
     case HOSTS_FETCH_ERROR:
       return {
@@ -45,5 +49,13 @@ const reducer = (state: IHostsState = initialState, action: APIAction) => {
       return state;
   }
 };
+
+//
+//
+// Selectors
+export const getHosts = (state: IApplicationState) =>
+  Object.keys(state.hosts.byId).map(id => state.hosts.byId[id]);
+export const getHost = (state: IApplicationState, id: number) =>
+  state.hosts.byId[id];
 
 export default reducer;

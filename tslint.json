@@ -9,6 +9,9 @@
     "ordered-imports": false,
     "no-implicit-dependencies": [true, "dev"],
     "object-literal-sort-keys": false,
-    "object-literal-key-quotes": [true, "as-needed"]
+    "object-literal-key-quotes": [true, "as-needed"],
+    "no-submodule-imports": false,
+    "curly": [true, "ignore-same-line"],
+    "trailing-comma": [true, { "esSpecCompliant": true }]
   }
 }

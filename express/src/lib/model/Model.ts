@@ -40,8 +40,6 @@ const createModel = ({
     public primaryKey: string = primaryKey;
     public fields: IModelFieldMapping = fields;
 
-    public toString = toString ? toString : () => `Model ${this.instance.id}`;
-
     public preValidate = preValidate ? preValidate : () => true;
 
     public preSave = preSave ? preSave : (): void => undefined;
@@ -55,6 +53,13 @@ const createModel = ({
         this.persisted = persisted;
       }
     }
+
+    public toString = () => {
+      const stringValue = toString
+        ? toString(this.instance)
+        : `Model ${this.instance[this.primaryKey]}`;
+      return stringValue;
+    };
 
     public get = (fieldName: string) =>
       this.fields[fieldName].get(this.instance[fieldName]);

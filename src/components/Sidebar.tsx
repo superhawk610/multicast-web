@@ -29,7 +29,7 @@ const Sidebar = ({ location }: RouteComponentProps) => (
         const isActive = !!matchPath(location.pathname, route.path);
 
         return (
-          <Link active={isActive} key={index} to={route.path}>
+          <Link active={isActive ? 1 : 0} key={index} to={route.path}>
             {key}
           </Link>
         );
@@ -43,8 +43,8 @@ const Container = styled.div`
   left: 0;
   width: 250px;
   height: 100%;
-  padding: 25px;
-  background: ${COLORS.greyLighter};
+  padding: 35px;
+  background: ${COLORS.white3};
 `;
 
 const Header = styled.div`
@@ -64,7 +64,7 @@ const Heading = styled.div`
   color: ${COLORS.black3};
 `;
 
-const Link = styled(LinkComponent)<{ active: boolean }>`
+const Link = styled(LinkComponent)<{ active: number }>`
   display: block;
   font-size: 1.2em;
   font-weight: 700;

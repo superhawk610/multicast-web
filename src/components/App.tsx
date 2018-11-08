@@ -1,12 +1,18 @@
 import * as React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
+import { setConfig, hot } from 'react-hot-loader';
 
 import Sidebar from './Sidebar';
 
 import NotFound from '../pages/NotFound';
 
 import routes from '../routes';
+
+// FIXME: it seems that styled-components v4 may be causing
+// tons of incorrect error logs, the issue is currently tracked
+// at https://github.com/gaearon/react-hot-loader/issues/1034.
+// this disables react-hot-loader logging entirely
+setConfig({ logLevel: 'disable-all-errors' });
 
 const App = () => (
   <>

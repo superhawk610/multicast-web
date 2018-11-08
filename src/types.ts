@@ -12,3 +12,10 @@ interface IAPIAction {
 }
 
 export type APIAction = IAPIAction & Action;
+
+export interface IInputEvent {
+  target: {
+    name: string;
+    value: string;
+  };
+}

@@ -1,4 +1,5 @@
 import { IFieldTypeMapping } from './types';
+export { IModelInstance } from './types';
 
 export { default as createModel } from './Model';
 export { default as ModelManager } from './ModelManager';

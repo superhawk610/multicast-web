@@ -1,11 +1,11 @@
 import Hosts from './pages/Hosts';
 import Configuration from './pages/Configuration';
 
-import { ComponentClass } from 'react';
+import { ComponentClass, SFC } from 'react';
 
 interface IRouteConfiguration {
   path: string;
-  component: ComponentClass;
+  component: ComponentClass | SFC;
   displayInSidebar: boolean;
 }
 interface IRoutes {

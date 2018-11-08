@@ -33,7 +33,7 @@ export interface IModelConfiguration {
   tableName: string;
   primaryKey?: string;
   fields: IModelFieldMapping;
-  toString?: () => string;
+  toString?: (instance: IModelInstance) => string;
   preValidate?: () => boolean;
   preSave?: () => void;
   serialize?: (instance: IModelInstance) => IModelInstance;

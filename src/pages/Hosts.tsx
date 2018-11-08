@@ -2,9 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import Page from '../components/Page';
+import Host from '../components/Host';
 
 import { IApplicationState } from '../reducers';
-import { IHost } from '../reducers/hosts.reducer';
+import { getHosts, IHost } from '../reducers/hosts.reducer';
 import * as actions from '../actions';
 
 export interface IProps {
@@ -23,7 +24,7 @@ class Hosts extends React.Component<IProps> {
     const { loading, error, hosts } = this.props;
 
     return (
-      <Page heading="Page Title" subheading="Page Subtitle">
+      <Page heading="Hosts" subheading="Multicast Host Deployments">
         {loading ? (
           <div>Loading...</div>
         ) : error ? (
@@ -31,7 +32,14 @@ class Hosts extends React.Component<IProps> {
         ) : (
           <div>
             {hosts.map((host, index) => (
-              <div key={index}>{host.address}</div>
+              <Host
+                key={index}
+                id={host.id}
+                address={host.address}
+                nickname={host.nickname}
+                status="online"
+                version="3.0.0"
+              />
             ))}
           </div>
         )}
@@ -43,7 +51,7 @@ class Hosts extends React.Component<IProps> {
 const mapStateToProps = (state: IApplicationState) => ({
   loading: state.hosts.loading,
   error: state.hosts.error,
-  hosts: state.hosts.data,
+  hosts: getHosts(state),
 });
 
 const mapDispatchToProps = {
