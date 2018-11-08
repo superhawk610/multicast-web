@@ -17,8 +17,9 @@ interface IProps {
   label?: string;
   placeholder?: string;
   name?: string;
-  value: string | number;
-  onChange: (value: string) => void;
+  value?: string | number;
+  onChange?: (value: string) => void;
+  defaultValue?: string;
   disabled?: boolean;
   loading?: boolean;
   leftIcon?: any;
@@ -36,6 +37,7 @@ const Input = ({
   name,
   value,
   onChange,
+  defaultValue,
   disabled,
   loading,
   leftIcon,
@@ -57,7 +59,8 @@ const Input = ({
           disabled={disabled}
           name={name}
           value={value}
-          onChange={handleChange(onChange)}
+          defaultValue={defaultValue}
+          onChange={onChange && handleChange(onChange)}
         />
         {leftIcon && (
           <span className="icon is-left">

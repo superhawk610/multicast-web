@@ -5,14 +5,16 @@ import {
   HOSTS_FETCH_ERROR,
 } from '../actions';
 
-import { APIAction } from '../types';
+import { APIAction, Status } from '../types';
 import { IApplicationState } from './index';
 
 export interface IHost {
   id: number;
   address: string;
   nickname: string;
+  status: Status;
 }
+
 export interface IHostsState {
   loading: boolean;
   error: Error | null;
@@ -55,7 +57,7 @@ const reducer = (state: IHostsState = initialState, action: APIAction) => {
 // Selectors
 export const getHosts = (state: IApplicationState) =>
   Object.keys(state.hosts.byId).map(id => state.hosts.byId[id]);
-export const getHost = (state: IApplicationState, id: number) =>
+export const getHostById = (state: IApplicationState, id: number) =>
   state.hosts.byId[id];
 
 export default reducer;

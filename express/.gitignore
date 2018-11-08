@@ -1,6 +1,9 @@
 # Node
 node_modules
 
+# Yarn
+yarn-error.log
+
 # TypeScript build
 ts-built
 

@@ -12,6 +12,16 @@ export const fieldTypes: IFieldTypeMapping = {
     get: (v: number) => !!v,
     set: (v: boolean) => (v ? 1 : 0),
   },
+  foreignKey: (
+    relatedTable: string,
+    relatedTablePrimaryKey: string = 'id',
+  ) => ({
+    databaseKeyword: 'INTEGER',
+    get: (v: number) => v,
+    relatedTable,
+    relatedTablePrimaryKey,
+    set: (v: number) => v,
+  }),
   int: {
     databaseKeyword: 'INTEGER',
     get: (v: number) => v,

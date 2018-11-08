@@ -19,3 +19,5 @@ export interface IInputEvent {
     value: string;
   };
 }
+
+export type Status = 'online' | 'offline' | 'searching';

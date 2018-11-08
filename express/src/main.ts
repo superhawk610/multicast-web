@@ -8,6 +8,7 @@ import { PORT } from './lib/config';
 import initDb from './lib/db';
 
 import configRouter from './routes/config';
+import devicesRouter from './routes/devices';
 import hostsRouter from './routes/hosts';
 
 initDb();
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use('/config', configRouter);
 app.use('/hosts', hostsRouter);
+app.use('/devices', devicesRouter);
 
 app.listen(PORT, () => {
   // tslint:disable-next-line:no-console

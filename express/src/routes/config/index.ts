@@ -1,12 +1,14 @@
-import { Router, Response } from 'express';
+import { Response, Router } from 'express';
 import { managers } from '../../models';
 
 const router = Router();
 
-type DatabaseLog = { created: Array<string> };
+interface IDatabaseLog {
+  created: string[];
+}
 
-router.get('/init-db', (_, res: Response) => {
-  const log: DatabaseLog = { created: [] };
+router.post('/init-db', (_, res: Response) => {
+  const log: IDatabaseLog = { created: [] };
   managers.forEach(manager => {
     manager.up();
     log.created.push(manager.tableName);

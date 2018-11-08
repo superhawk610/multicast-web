@@ -4,6 +4,8 @@ export type PrimaryKeyValue = string | number;
 
 export interface IFieldDefinition {
   databaseKeyword: string;
+  relatedTable?: string;
+  relatedTablePrimaryKey?: string;
   set: (v: any) => DatabaseValue;
   get: (v: any) => InstanceValue;
 }
@@ -27,6 +29,7 @@ export interface IFieldTypeMapping {
   boolean: IFieldDefinition;
   text: IFieldDefinition;
   varchar: ComposedFieldDefinition;
+  foreignKey: ComposedFieldDefinition;
 }
 
 export interface IModelConfiguration {

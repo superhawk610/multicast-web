@@ -1,36 +1,32 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { colorForStatus } from '../utils';
 
 import Box from './Box';
 import Well from './Well';
 import { Level, LevelLeft, LevelRight, LevelItem } from './Level';
 import IconButton from './IconButton';
-import HostDetails from './HostDetails';
+import StatusLight from './StatusLight';
+
+import HostForm from '../forms/HostForm';
 
 import { chevronDown } from 'react-icons-kit/feather/chevronDown';
 
 import { COLORS } from '../constants';
 
+import { Status } from '../types';
+
 interface IProps {
   id: number;
   address: string;
   nickname: string;
-  status: string;
+  status: Status;
   version: string;
 }
 
 interface IState {
   active: boolean;
 }
-
-const colorForStatus = (status: string) => {
-  switch (status) {
-    case 'online':
-      return COLORS.green;
-    default:
-      return COLORS.yellow;
-  }
-};
 
 class Host extends React.Component<IProps, IState> {
   public state = {
@@ -63,7 +59,9 @@ class Host extends React.Component<IProps, IState> {
               </LevelItem>
             </LevelLeft>
             <LevelRight>
-              <LevelItem>{status}</LevelItem>
+              <LevelItem>
+                <StatusLight status={status} />
+              </LevelItem>
               <LevelItem>
                 <DimText>{version}</DimText>
               </LevelItem>
@@ -75,7 +73,7 @@ class Host extends React.Component<IProps, IState> {
         </Box>
         {active && (
           <DetailWell>
-            <HostDetails id={id} />
+            <HostForm id={id} />
           </DetailWell>
         )}
       </>

@@ -8,16 +8,23 @@ import { IApplicationState } from '../reducers';
 import { getHosts, IHost } from '../reducers/hosts.reducer';
 import * as actions from '../actions';
 
-export interface IProps {
+interface IStateProps {
   loading: boolean;
   error: Error | null;
   hosts: IHost[];
-  fetchHosts: typeof actions.fetchHosts;
 }
 
-class Hosts extends React.Component<IProps> {
+interface IDispatchProps {
+  fetchHosts: typeof actions.fetchHosts;
+  fetchDevices: typeof actions.fetchDevices;
+}
+
+type Props = IStateProps & IDispatchProps;
+
+class Hosts extends React.Component<Props> {
   public componentDidMount() {
     this.props.fetchHosts();
+    this.props.fetchDevices();
   }
 
   public render() {
@@ -37,7 +44,7 @@ class Hosts extends React.Component<IProps> {
                 id={host.id}
                 address={host.address}
                 nickname={host.nickname}
-                status="online"
+                status={host.status}
                 version="3.0.0"
               />
             ))}
@@ -56,6 +63,7 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = {
   fetchHosts: actions.fetchHosts,
+  fetchDevices: actions.fetchDevices,
 };
 
 export default connect(
