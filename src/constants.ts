@@ -25,6 +25,7 @@ export const COLORS = {
 // to specify which Themes they accept
 // tslint:disable-next-line:no-namespace
 export namespace Themes {
+  export type none = '';
   export type white = 'is-white';
   export type light = 'is-light';
   export type dark = 'is-dark';
@@ -39,6 +40,7 @@ export namespace Themes {
 }
 
 export const THEMES: {
+  none: Themes.none;
   white: Themes.white;
   light: Themes.light;
   dark: Themes.dark;
@@ -51,6 +53,7 @@ export const THEMES: {
   warning: Themes.warning;
   danger: Themes.danger;
 } = {
+  none: '',
   white: 'is-white',
   light: 'is-light',
   dark: 'is-dark',

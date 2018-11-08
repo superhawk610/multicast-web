@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import Modal, { IProps as IModalProps } from '../components/Modal';
 
+import AlertForm from '../forms/AlertForm';
+
 interface IOwnProps {
   hostId: number | null;
 }
@@ -14,11 +16,11 @@ const AlertModal = ({ hostId, active, onClose }: Props) =>
   hostId ? (
     <Modal
       active={active}
-      heading="Manage Device"
+      heading="Send Alert"
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      modal for host {hostId}
+      <AlertForm id={hostId} />
     </Modal>
   ) : null;
 

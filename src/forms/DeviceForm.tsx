@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { Row, Column } from '../components/Grid';
 import Input from '../components/Input';
 import { IApplicationState } from '../reducers';
 import { IDevice, getDeviceById } from '../reducers/devices.reducer';
@@ -40,21 +39,13 @@ class DeviceForm extends React.Component<Props, IState> {
 
     return (
       <>
-        <Row>
-          <Column>
-            <Input disabled label="Identifier" defaultValue={identifier} />
-          </Column>
-        </Row>
-        <Row>
-          <Column>
-            <Input
-              name="nickname"
-              label="Nickname"
-              value={nickname}
-              onChange={this.onChange('nickname')}
-            />
-          </Column>
-        </Row>
+        <Input disabled label="Identifier" defaultValue={identifier} />
+        <Input
+          name="nickname"
+          label="Nickname"
+          value={nickname}
+          onChange={this.onChange('nickname')}
+        />
       </>
     );
   }

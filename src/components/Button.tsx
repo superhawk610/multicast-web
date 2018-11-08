@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import Icon from 'react-icons-kit';
 
-import { Themes } from '../constants';
+import { Themes, THEMES } from '../constants';
 
-type ButtonTheme =
+export type ButtonTheme =
+  | Themes.none
   | Themes.white
   | Themes.light
   | Themes.dark
@@ -32,7 +33,7 @@ const Button = ({
   block,
   text,
   onClick,
-  theme = '',
+  theme = THEMES.none,
   disabled,
   loading,
   leftIcon,

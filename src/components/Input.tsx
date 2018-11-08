@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Icon from 'react-icons-kit';
 
-import { Themes } from '../constants';
+import { Themes, THEMES } from '../constants';
 
 import { IInputEvent } from '../types';
 
@@ -42,7 +42,7 @@ const Input = ({
   loading,
   leftIcon,
   rightIcon,
-  theme = '',
+  theme = THEMES.none,
 }: IProps) => {
   const loadingClass = loading ? 'is-loading' : '';
   const leftIconClass = leftIcon ? 'has-icons-left' : '';

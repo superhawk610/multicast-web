@@ -14,7 +14,7 @@ const BlackoutModal = ({ hostId, active, onClose }: Props) =>
   hostId ? (
     <Modal
       active={active}
-      heading="Manage Device"
+      heading="Initiate Blackout"
       onClose={onClose}
       onSubmit={handleSubmit}
     >
