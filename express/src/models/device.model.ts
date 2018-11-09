@@ -9,6 +9,7 @@ import {
   AllowNull,
 } from 'sequelize-typescript';
 
+import Host from './host.model';
 import Channel from './channel.model';
 
 @Table
@@ -26,6 +27,13 @@ class Device extends Model<Device> {
 
   @Column
   public status: string;
+
+  @ForeignKey(() => Host)
+  @Column
+  public hostId: number;
+
+  @BelongsTo(() => Host)
+  public host: Host;
 
   @AllowNull
   @ForeignKey(() => Channel)

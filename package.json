@@ -14,6 +14,7 @@
     "dev": "parcel serve src/index.html"
   },
   "devDependencies": {
+    "@types/lodash.chunk": "^4.2.4",
     "@types/lodash.startcase": "^4.4.4",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
@@ -29,6 +30,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "bulma": "^0.7.2",
     "immer": "^1.7.4",
+    "lodash.chunk": "^4.2.0",
     "lodash.startcase": "^4.4.0",
     "parcel-bundler": "^1.10.3",
     "prettier": "^1.14.3",

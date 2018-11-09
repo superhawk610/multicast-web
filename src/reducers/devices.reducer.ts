@@ -9,7 +9,9 @@ import { APIAction, Status } from '../types';
 import { IApplicationState } from './index';
 
 export interface IDevice {
-  host_id: number;
+  id: number;
+  hostId: number;
+  channelId: number;
   identifier: string;
   nickname: string;
   status: Status;
@@ -39,7 +41,7 @@ const reducer = (state: IDevicesState = initialState, action: APIAction) => {
       return {
         ...state,
         loading: false,
-        byId: keyBy(action.api.response as IDevice[], 'identifier'),
+        byId: keyBy(action.api.response as IDevice[], 'id'),
       };
     case DEVICES_FETCH_ERROR:
       return {
@@ -61,10 +63,10 @@ export const getDevicesForHost = (state: IApplicationState, hostId: number) =>
   Object.keys(state.devices.byId)
     .filter(id => {
       const device = state.devices.byId[id];
-      return device.host_id === hostId;
+      return device.hostId === hostId;
     })
     .map(id => state.devices.byId[id]);
-export const getDeviceById = (state: IApplicationState, id: string) =>
+export const getDeviceById = (state: IApplicationState, id: number) =>
   state.devices.byId[id];
 
 export default reducer;

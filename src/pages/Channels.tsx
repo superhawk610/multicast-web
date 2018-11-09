@@ -8,6 +8,8 @@ import Table from '../components/Table';
 
 import RegisterChannelForm from '../forms/RegisterChannelForm';
 import { IApplicationState } from '../reducers';
+import { getChannels, IChannel } from '../reducers/channels.reducer';
+import * as actions from '../actions';
 
 interface IStateProps {
   loading: boolean;
@@ -42,6 +44,7 @@ class Channels extends React.Component<Props> {
           headers={['id', 'name']}
           headerLabels={['#', 'Name']}
           actionForRow={actionForRow}
+          noRecordsFoundText="No Channels Found."
         />
         <Heading2>Register New Channel</Heading2>
         <RegisterChannelForm />

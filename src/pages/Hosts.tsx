@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Page from '../components/Page';
 import { Heading2 } from '../components/Heading';
@@ -44,7 +45,7 @@ class Hosts extends React.Component<Props> {
           </div>
         ) : loading ? (
           <div className="with-loading-spinner">Loading...</div>
-        ) : (
+        ) : hosts.length > 0 ? (
           <div>
             {hosts.map((host, index) => (
               <Host
@@ -56,6 +57,11 @@ class Hosts extends React.Component<Props> {
                 version="3.0.0"
               />
             ))}
+          </div>
+        ) : (
+          <div>
+            <div>No Existing Deployments.</div>
+            <Link to="/configuration">Register One Here</Link>
           </div>
         )}
       </Page>
