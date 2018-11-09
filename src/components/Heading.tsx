@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 import { COLORS } from '../constants';
@@ -8,10 +7,10 @@ const Heading = styled.h1`
   font-weight: 700;
 `;
 
-export const Heading2 = styled.h2`
+export const Heading2 = styled.h2<{ color?: string }>`
   font-size: 1.2em;
   font-weight: 700;
-  color: ${COLORS.green};
+  color: ${props => props.color || COLORS.green};
   margin-bottom: 25px;
   position: relative;
 

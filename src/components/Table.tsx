@@ -3,6 +3,7 @@ import startCase = require('lodash.startcase');
 import styled from 'styled-components';
 
 import Button from './Button';
+import { Heading2 } from './Heading';
 
 import { chevronRight } from 'react-icons-kit/feather/chevronRight';
 
@@ -25,10 +26,13 @@ interface IRenderMapping<T> {
 
 interface IProps<T> {
   data: T[];
+  loading?: boolean;
+  error?: Error | null;
   headers: string[];
   headerLabels?: string[];
   renderRow?: IRenderMapping<T>;
   actionForRow?: (row: T) => IAction<T>;
+  actionHeader?: React.ReactNode;
   noRecordsFoundText?: string;
 }
 
@@ -36,10 +40,13 @@ class Table<T> extends React.Component<IProps<T>> {
   public render() {
     const {
       data,
+      loading,
+      error,
       headers,
       headerLabels,
       renderRow = {},
       actionForRow,
+      actionHeader,
       noRecordsFoundText = 'No Records Found.',
     } = this.props;
 
@@ -52,11 +59,30 @@ class Table<T> extends React.Component<IProps<T>> {
                 {headerLabels ? headerLabels[index] : startCase(header)}
               </HeaderCell>
             ))}
-            {actionForRow && <HeaderCell />}
+            {actionForRow && (
+              <HeaderCell style={{ textAlign: 'right' }}>
+                {actionHeader}
+              </HeaderCell>
+            )}
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 ? (
+          {error ? (
+            <tr>
+              <TableCell colSpan={42} style={{ padding: '25px' }}>
+                <Heading2 color={COLORS.red}>
+                  Oops! We encountered an error.
+                </Heading2>
+                {error.message}
+              </TableCell>
+            </tr>
+          ) : loading ? (
+            <tr>
+              <TableCell colSpan={42}>
+                <div className="with-loading-spinner">Loading...</div>
+              </TableCell>
+            </tr>
+          ) : data.length > 0 ? (
             data.map((row, rowIndex) => {
               const action = actionForRow && actionForRow(row);
               const onClick = () => action && action.onClick(row);

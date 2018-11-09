@@ -20,17 +20,22 @@ export type ButtonTheme =
 
 interface IProps {
   block?: boolean;
+  adjacent?: boolean;
+  submit?: boolean;
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   theme?: ButtonTheme | '';
   disabled?: boolean;
   loading?: boolean;
   leftIcon?: any;
   rightIcon?: any;
+  style?: {};
 }
 
 const Button = ({
   block,
+  adjacent,
+  submit,
   text,
   onClick,
   theme = THEMES.none,
@@ -38,6 +43,7 @@ const Button = ({
   loading,
   leftIcon,
   rightIcon,
+  style,
   ...delegated
 }: IProps) => {
   const className = `button ${block ? 'is-fullwidth' : ''} ${theme} ${
@@ -46,9 +52,14 @@ const Button = ({
 
   return (
     <button
+      type={submit ? 'button' : 'submit'}
       className={className}
       disabled={disabled}
       onClick={onClick}
+      style={{
+        marginRight: adjacent ? '10px' : 0,
+        ...style,
+      }}
       {...delegated}
     >
       {leftIcon && <Icon icon={leftIcon} style={{ margin: '0 5px 2px 0' }} />}

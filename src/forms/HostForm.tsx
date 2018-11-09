@@ -6,24 +6,36 @@ import Input from '../components/Input';
 import Table from '../components/Table';
 import Button from '../components/Button';
 import StatusLight from '../components/StatusLight';
+import IconButton from '../components/IconButton';
+import PixelShifter from '../components/PixelShifter';
+import ThickenSvg from '../components/ThickenSvg';
 
 import DeviceModal from '../modals/DeviceModal';
 import AlertModal from '../modals/AlertModal';
 import BlackoutModal from '../modals/BlackoutModal';
+
+import { refreshCw } from 'react-icons-kit/feather/refreshCw';
 
 import { THEMES } from '../constants';
 
 import { IApplicationState } from '../reducers';
 import { getHostById, IHost } from '../reducers/hosts.reducer';
 import { IDevice, getDevicesForHost } from '../reducers/devices.reducer';
+import * as actions from '../actions';
 
 interface IOwnProps {
   id: number;
 }
 
 interface IStateProps {
+  loading: boolean;
+  error: Error | null;
   host: IHost;
   devices: IDevice[];
+}
+
+interface IDispatchProps {
+  fetchDevicesForHost: (id: number) => void;
 }
 
 interface IState {
@@ -33,7 +45,7 @@ interface IState {
   activeDeviceId: string | null;
 }
 
-type Props = IOwnProps & IStateProps;
+type Props = IOwnProps & IStateProps & IDispatchProps;
 
 class HostDetails extends React.Component<Props, IState> {
   public static getDerivedStateFromProps(props: Props, state: IState) {
@@ -54,6 +66,9 @@ class HostDetails extends React.Component<Props, IState> {
   public onManageClick = (device: IDevice) =>
     this.setState({ activeDeviceId: device.identifier });
 
+  public onRefreshClick = () =>
+    this.props.fetchDevicesForHost(this.props.host.id);
+
   public onAlertClick = () => this.setState({ alertModalActive: true });
 
   public onBlackoutClick = () => this.setState({ blackoutModalActive: true });
@@ -67,6 +82,8 @@ class HostDetails extends React.Component<Props, IState> {
 
   public render() {
     const {
+      loading,
+      error,
       host: { id, nickname: originalNickname },
       devices,
     } = this.props;
@@ -127,12 +144,26 @@ class HostDetails extends React.Component<Props, IState> {
         <label className="label">Connected Devices</label>
         <Table
           data={devices}
+          loading={loading}
+          error={error}
           headers={['nickname', 'identifier', 'status']}
           headerLabels={['Nickname', 'Device Identifier', 'Status']}
           renderRow={{
             status: (device: IDevice) => <StatusLight status={device.status} />,
           }}
           actionForRow={actionForRow}
+          actionHeader={
+            <PixelShifter up={2}>
+              <ThickenSvg>
+                <IconButton
+                  rotate
+                  icon={refreshCw}
+                  size={18}
+                  onClick={this.onRefreshClick}
+                />
+              </ThickenSvg>
+            </PixelShifter>
+          }
           noRecordsFoundText="No Devices Found."
         />
         <DeviceModal id={activeDeviceId} onClose={this.closeDeviceModal} />
@@ -155,8 +186,17 @@ const mapStateToProps = (
   state: IApplicationState,
   { id }: IOwnProps,
 ): IStateProps => ({
+  loading: state.devices.loading,
+  error: state.devices.error,
   host: getHostById(state, id),
   devices: getDevicesForHost(state, id),
 });
 
-export default connect(mapStateToProps)(HostDetails);
+const mapDispatchToProps = {
+  fetchDevicesForHost: actions.fetchDevicesForHost,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HostDetails);

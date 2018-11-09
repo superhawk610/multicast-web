@@ -12,6 +12,7 @@
     "object-literal-key-quotes": [true, "as-needed"],
     "no-submodule-imports": false,
     "curly": [true, "ignore-same-line"],
-    "trailing-comma": [true, { "esSpecCompliant": true }]
+    "trailing-comma": [true, { "esSpecCompliant": true }],
+    "jsx-curly-spacing": false
   }
 }

@@ -19,6 +19,7 @@ const AlertModal = ({ hostId, active, onClose }: Props) =>
       heading="Send Alert"
       onClose={onClose}
       onSubmit={handleSubmit}
+      submitText="Send"
     >
       <AlertForm id={hostId} />
     </Modal>

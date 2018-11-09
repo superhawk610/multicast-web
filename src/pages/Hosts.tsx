@@ -2,7 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import Page from '../components/Page';
+import { Heading2 } from '../components/Heading';
 import Host from '../components/Host';
+
+import { COLORS } from '../constants';
 
 import { IApplicationState } from '../reducers';
 import { getHosts, IHost } from '../reducers/hosts.reducer';
@@ -15,8 +18,8 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
-  fetchHosts: typeof actions.fetchHosts;
-  fetchDevices: typeof actions.fetchDevices;
+  fetchHosts: () => void;
+  fetchDevices: () => void;
 }
 
 type Props = IStateProps & IDispatchProps;
@@ -32,10 +35,15 @@ class Hosts extends React.Component<Props> {
 
     return (
       <Page heading="Hosts" subheading="Multicast Host Deployments">
-        {loading ? (
-          <div>Loading...</div>
-        ) : error ? (
-          <div>{error.message}</div>
+        {error ? (
+          <div style={{ padding: '25px' }}>
+            <Heading2 color={COLORS.red}>
+              Oops! We encountered an error.
+            </Heading2>
+            {error.message}
+          </div>
+        ) : loading ? (
+          <div className="with-loading-spinner">Loading...</div>
         ) : (
           <div>
             {hosts.map((host, index) => (

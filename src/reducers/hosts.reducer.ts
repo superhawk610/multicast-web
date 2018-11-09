@@ -21,7 +21,7 @@ export interface IHostsState {
   byId: { [id: string]: IHost };
 }
 
-const initialState = {
+const initialState: IHostsState = {
   loading: false,
   error: null,
   byId: {},

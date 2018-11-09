@@ -1,36 +1,26 @@
-import { Response, Router } from 'express';
-import { IDevice } from '../../models/Device';
+import { Request, Response, Router } from 'express';
+import Device from '../../models/device.model';
 
 const router = Router();
 
-const devices: IDevice[] = [
-  {
-    host_id: 1,
-    identifier: 'ABC-123',
-    nickname: 'Living Room',
-    status: 'online',
-  },
-  { host_id: 1, identifier: 'ABC-456', nickname: 'Bedroom', status: 'offline' },
-  {
-    host_id: 1,
-    identifier: 'ABC-789',
-    nickname: 'Kitchen',
-    status: 'searching',
-  },
-  {
-    host_id: 2,
-    identifier: 'DEF-123',
-    nickname: 'Living Room',
-    status: 'online',
-  },
-  {
-    host_id: 3,
-    identifier: 'GHI-123',
-    nickname: 'Living Room',
-    status: 'offline',
-  },
-];
+router
+  .route('/')
+  .get((_, res: Response) => Device.all().then(devices => res.json(devices)))
+  .post((req: Request, res: Response) =>
+    Device.create(req.body).then(device => res.json(device.toJSON())),
+  );
 
-router.get('/', (_, res: Response) => res.json(devices));
+router
+  .route('/:id')
+  .get((req: Request, res: Response) =>
+    Device.findById(req.params.id).then(device => res.json(device.toJSON())),
+  )
+  .patch((req: Request, res: Response) =>
+    Device.findById(req.params.id).then(device =>
+      device
+        .update(req.body)
+        .then(updatedDevice => res.json(updatedDevice.toJSON())),
+    ),
+  );
 
 export default router;

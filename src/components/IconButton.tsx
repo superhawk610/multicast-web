@@ -9,22 +9,29 @@ interface IProps {
   icon: any;
   size?: number;
   onClick?: () => void;
+  rotate?: boolean;
 }
 
-const IconButton = ({ icon, size = 24, onClick, ...delegated }: IProps) => (
-  <Button {...delegated}>
+const IconButton = ({
+  icon,
+  size = 24,
+  onClick,
+  rotate,
+  ...delegated
+}: IProps) => (
+  <Button rotate={rotate ? 1 : 0} {...delegated}>
     <Icon icon={icon} size={size} onClick={onClick} />
   </Button>
 );
 
-const Button = styled.button`
+const Button = styled.button<{ rotate: number }>`
   background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
 
   &:active {
-    transform: translateY(1px);
+    transform: ${props => (props.rotate ? 'rotate(20deg)' : 'translateY(1px)')};
   }
 `;
 

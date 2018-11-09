@@ -2,6 +2,10 @@ import * as React from 'react';
 
 import Modal, { IProps as IModalProps } from '../components/Modal';
 
+import BlackoutForm from '../forms/BlackoutForm';
+
+import { THEMES } from '../constants';
+
 interface IOwnProps {
   hostId: number | null;
 }
@@ -17,8 +21,10 @@ const BlackoutModal = ({ hostId, active, onClose }: Props) =>
       heading="Initiate Blackout"
       onClose={onClose}
       onSubmit={handleSubmit}
+      submitText="Begin"
+      submitButtonTheme={THEMES.danger}
     >
-      modal for host {hostId}
+      <BlackoutForm id={hostId} />
     </Modal>
   ) : null;
 

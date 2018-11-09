@@ -47,6 +47,7 @@ const Input = ({
   const loadingClass = loading ? 'is-loading' : '';
   const leftIconClass = leftIcon ? 'has-icons-left' : '';
   const rightIconClass = rightIcon ? 'has-icons-right' : '';
+
   return (
     <div className="field">
       {label && <label className="label">{label}</label>}

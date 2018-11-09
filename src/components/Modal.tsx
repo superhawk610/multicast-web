@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Button from './Button';
+import Button, { ButtonTheme } from './Button';
 
 import { THEMES } from '../constants';
 
@@ -10,6 +10,8 @@ export interface IProps {
   active: boolean;
   onClose: () => void;
   onSubmit: () => void;
+  submitText?: string;
+  submitButtonTheme?: ButtonTheme;
   children: React.ReactNode;
 }
 
@@ -19,6 +21,8 @@ const Modal = ({
   active,
   onClose,
   onSubmit,
+  submitText = 'Save',
+  submitButtonTheme = THEMES.success,
   children,
 }: IProps) => (
   <div className={`modal ${active ? 'is-active' : ''}`}>
@@ -31,7 +35,11 @@ const Modal = ({
       </header>
       <section className="modal-card-body">{children}</section>
       <footer className="modal-card-foot">
-        <Button text="Save" theme={THEMES.success} onClick={onSubmit} />
+        <Button
+          text={submitText}
+          theme={submitButtonTheme}
+          onClick={onSubmit}
+        />
         <Button text="Cancel" theme={THEMES.light} onClick={onClose} />
       </footer>
     </div>

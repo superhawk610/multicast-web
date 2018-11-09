@@ -6,7 +6,9 @@
     "rootDir": "src",
     "inlineSourceMap": true,
     "noImplicitAny": true,
-    "removeComments": true
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["**/*"],
   "exclude": ["node_modules"]

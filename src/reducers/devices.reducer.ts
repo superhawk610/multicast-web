@@ -21,7 +21,7 @@ export interface IDevicesState {
   byId: { [id: string]: IDevice };
 }
 
-const initialState = {
+const initialState: IDevicesState = {
   loading: false,
   error: null,
   byId: {},

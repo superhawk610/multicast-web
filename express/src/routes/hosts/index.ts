@@ -1,34 +1,24 @@
 import { Request, Response, Router } from 'express';
-import { HostManager } from '../../models/Host';
+import Host from '../../models/host.model';
 
 const router = Router();
 
 router
   .route('/')
-  .get((_, res: Response) =>
-    res.json(
-      HostManager.all().map(m => ({ ...m.serialize(), status: 'online' })),
-    ),
-  )
-  .post((req: Request, res: Response) => {
-    const instance = req.body;
-    const model = HostManager.create(instance);
-    res.json({ ...model.serialize(), status: 'online' });
-  });
+  .get((_, res: Response) => Host.all().then(hosts => res.json(hosts)))
+  .post((req: Request, res: Response) =>
+    Host.create(req.body).then(host => res.json(host.toJSON())),
+  );
 
 router
   .route('/:id')
   .get((req: Request, res: Response) =>
-    res.json({
-      ...HostManager.findOne(req.params.id).serialize(),
-      status: 'online',
-    }),
+    Host.findById(req.params.id).then(host => res.json(host.toJSON())),
   )
-  .patch((req: Request, res: Response) => {
-    const model = HostManager.findOne(req.params.id);
-    model.update(req.body);
-    model.save();
-    res.json({ ...model.serialize(), status: 'online' });
-  });
+  .patch((req: Request, res: Response) =>
+    Host.findById(req.params.id).then(host =>
+      host.update(req.body).then(updatedHost => res.json(updatedHost.toJSON())),
+    ),
+  );
 
 export default router;
