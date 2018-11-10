@@ -12,7 +12,9 @@ type ChannelRequest = IChannelRequest & Request;
 
 router
   .route('/')
-  .get((_, res: Response) => Channel.all().then(channels => res.json(channels)))
+  .get((_, res: Response) =>
+    Channel.findAll().then(channels => res.json(channels)),
+  )
   .post((req: Request, res: Response) =>
     Channel.create(req.body).then(channel => res.json(channel.toJSON())),
   );

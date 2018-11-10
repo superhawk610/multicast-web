@@ -12,7 +12,7 @@ type HostRequest = IHostRequest & Request;
 
 router
   .route('/')
-  .get((_, res: Response) => Host.all().then(hosts => res.json(hosts)))
+  .get((_, res: Response) => Host.findAll().then(hosts => res.json(hosts)))
   .post((req: Request, res: Response) =>
     Host.create(req.body).then(host => res.json(host.toJSON())),
   );

@@ -12,7 +12,9 @@ type DeviceRequest = IDeviceRequest & Request;
 
 router
   .route('/')
-  .get((_, res: Response) => Device.all().then(devices => res.json(devices)))
+  .get((_, res: Response) =>
+    Device.findAll().then(devices => res.json(devices)),
+  )
   .post((req: Request, res: Response) =>
     Device.create(req.body).then(device => res.json(device.toJSON())),
   );
