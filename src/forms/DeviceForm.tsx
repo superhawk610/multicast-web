@@ -2,6 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import Input from '../components/Input';
+import ButtonGroup from '../components/ButtonGroup';
+
+import { THEMES } from '../constants';
+
 import { IApplicationState } from '../reducers';
 import { IDevice, getDeviceById } from '../reducers/devices.reducer';
 
@@ -29,6 +33,13 @@ class DeviceForm extends React.Component<Props, IState> {
     device: null,
   };
 
+  private rotationButtons = [
+    { text: 'None', value: 0, theme: THEMES.dark },
+    { text: '90°', value: 90, theme: THEMES.dark },
+    { text: '180°', value: 180, theme: THEMES.dark },
+    { text: '270°', value: 270, theme: THEMES.dark },
+  ];
+
   public onChange = (key: string) => (value: string) =>
     this.setState(state => ({ device: { ...state.device!, [key]: value } }));
 
@@ -36,6 +47,7 @@ class DeviceForm extends React.Component<Props, IState> {
     const { device } = this.state;
     const identifier = device!.identifier || '';
     const nickname = device!.nickname || '';
+    const rotation = device!.rotation || 0;
 
     return (
       <>
@@ -45,6 +57,12 @@ class DeviceForm extends React.Component<Props, IState> {
           label="Nickname"
           value={nickname}
           onChange={this.onChange('nickname')}
+        />
+        <label className="label">Rotation</label>
+        <ButtonGroup
+          buttons={this.rotationButtons}
+          value={rotation}
+          onChange={this.onChange('rotation')}
         />
       </>
     );

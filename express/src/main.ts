@@ -12,7 +12,7 @@ import hostsRouter from './routes/hosts';
 import devicesRouter from './routes/devices';
 import channelsRouter from './routes/channels';
 
-import { NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 initDb();
 
@@ -31,6 +31,13 @@ app.use('/utils', utilsRouter);
 app.use('/hosts', hostsRouter);
 app.use('/devices', devicesRouter);
 app.use('/channels', channelsRouter);
+
+app.use(
+  (err: Error | null, req: Request, res: Response, next: NextFunction) => {
+    if (!err) next();
+    res.json({ error: err!.message });
+  },
+);
 
 app.listen(PORT, () => {
   // tslint:disable-next-line:no-console

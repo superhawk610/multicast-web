@@ -1,6 +1,7 @@
 import {
   Table,
   Column,
+  Is,
   PrimaryKey,
   Model,
   ForeignKey,
@@ -24,6 +25,10 @@ class Device extends Model<Device> {
 
   @Column
   public nickname: string;
+
+  @Is(/0|90|180|270/)
+  @Column
+  public rotation: number;
 
   @Column
   public status: string;

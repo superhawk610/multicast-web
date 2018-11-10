@@ -1,7 +1,9 @@
+import { Action } from 'redux';
 import { Omit, APIAction } from './types';
 import { IHost } from './reducers/hosts.reducer';
 import { UtilAction } from './reducers/utils.reducer';
 import { IChannel } from './reducers/channels.reducer';
+import { DialogAction, DialogResultAction } from './reducers/dialog.reducer';
 
 // hosts
 export const HOSTS_FETCH_BEGIN = 'HOSTS_FETCH_BEGIN';
@@ -10,6 +12,9 @@ export const HOSTS_FETCH_ERROR = 'HOSTS_FETCH_ERROR';
 export const REGISTER_HOST_BEGIN = 'REGISTER_HOST_BEGIN';
 export const REGISTER_HOST_SUCCESS = 'REGISTER_HOST_SUCCESS';
 export const REGISTER_HOST_ERROR = 'REGISTER_HOST_ERROR';
+export const DELETE_HOST_BEGIN = 'DELETE_HOST_BEGIN';
+export const DELETE_HOST_SUCCESS = 'DELETE_HOST_SUCCESS';
+export const DELETE_HOST_ERROR = 'DELETE_HOST_ERROR';
 
 // devices
 export const DEVICES_FETCH_BEGIN = 'DEVICES_FETCH_BEGIN';
@@ -30,6 +35,10 @@ export const CHECK_HOST_VALIDITY_SUCCESS = 'CHECK_HOST_VALIDITY_SUCCESS';
 export const CHECK_HOST_VALIDITY_ERROR = 'CHECK_HOST_VALIDITY_ERROR';
 export const CLEAR_HOST_VALIDITY = 'CLEAR_HOST_VALIDITY';
 
+// dialog
+export const DIALOG_SHOW = 'DIALOG_SHOW';
+export const DIALOG_HIDE = 'DIALOG_HIDE';
+
 //
 //
 // hosts
@@ -48,6 +57,15 @@ export const registerHost = (
     method: 'post',
     path: 'hosts',
     body: host,
+  },
+});
+
+export const deleteHost = (id: number): APIAction => ({
+  type: DELETE_HOST_BEGIN,
+  id,
+  api: {
+    method: 'delete',
+    path: `hosts/${id}`,
   },
 });
 
@@ -101,4 +119,24 @@ export const checkHostValidity = (address: string): UtilAction => ({
 export const clearHostValidity = (): UtilAction => ({
   type: CLEAR_HOST_VALIDITY,
   utilKey: 'hostIsValid',
+});
+
+//
+//
+// dialog
+export const showDialog = (
+  heading: string,
+  message: string,
+  onConfirmAction: DialogResultAction,
+  onCancelAction?: DialogResultAction,
+): DialogAction => ({
+  type: DIALOG_SHOW,
+  heading,
+  message,
+  onConfirmAction,
+  onCancelAction,
+});
+
+export const hideDialog = (): Action => ({
+  type: DIALOG_HIDE,
 });

@@ -15,7 +15,12 @@ const PixelShifter = ({
   left = 0,
   children,
 }: IProps) => (
-  <div style={{ transform: `translate(${right - left}px, ${down - up}px)` }}>
+  <div
+    style={{
+      display: 'inline-block',
+      transform: `translate(${right - left}px, ${down - up}px)`,
+    }}
+  >
     {children}
   </div>
 );

@@ -8,12 +8,15 @@ import {
 import { APIAction, Status } from '../types';
 import { IApplicationState } from './index';
 
+export type DeviceRotation = 0 | 90 | 180 | 270;
+
 export interface IDevice {
   id: number;
   hostId: number;
   channelId: number;
   identifier: string;
   nickname: string;
+  rotation: DeviceRotation;
   status: Status;
 }
 

@@ -659,6 +659,11 @@
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
   integrity sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
 
+"@types/is-url@^1.2.28":
+  version "1.2.28"
+  resolved "https://registry.yarnpkg.com/@types/is-url/-/is-url-1.2.28.tgz#914dabd50546d9b0142806e42c72bc7c2b7e0787"
+  integrity sha1-kU2r1QVG2bAUKAbkLHK8fCt+B4c=
+
 "@types/lodash.chunk@^4.2.4":
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.chunk/-/lodash.chunk-4.2.4.tgz#d0301e7ed435f7eb60c570e715fb05047256d536"
@@ -3591,7 +3596,7 @@ is-symbol@^1.0.2:
   dependencies:
     has-symbols "^1.0.0"
 
-is-url@^1.2.2:
+is-url@^1.2.2, is-url@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.4.tgz#04a4df46d28c4cff3d73d01ff06abeb318a1aa52"
   integrity sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww==

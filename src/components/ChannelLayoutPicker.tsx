@@ -11,58 +11,113 @@ import { ChannelLayout } from '../reducers/channels.reducer';
 
 interface ILayoutProps {
   onClick: () => void;
+  clickIndicator?: boolean;
 }
 
-const SingleLayout = ({ onClick }: ILayoutProps) => (
-  <LayoutPreview onClick={onClick} templateColumns="1fr" templateRows="1fr">
-    <LayoutSection>URL 1</LayoutSection>
-  </LayoutPreview>
-);
-
-const EvenVerticalSplitLayout = ({ onClick }: ILayoutProps) => (
-  <LayoutPreview onClick={onClick} templateColumns="1fr" templateRows="1fr 1fr">
-    <LayoutSection>URL 1</LayoutSection>
-    <LayoutSection>URL 2</LayoutSection>
-  </LayoutPreview>
-);
-
-const EvenHorizontalSplitLayout = ({ onClick }: ILayoutProps) => (
-  <LayoutPreview onClick={onClick} templateColumns="1fr 1fr" templateRows="1fr">
-    <LayoutSection>URL 1</LayoutSection>
-    <LayoutSection>URL 2</LayoutSection>
-  </LayoutPreview>
-);
-
-const OneTwoVerticalSplitLayout = ({ onClick }: ILayoutProps) => (
-  <LayoutPreview onClick={onClick} templateColumns="1fr" templateRows="1fr 2fr">
-    <LayoutSection>URL 1</LayoutSection>
-    <LayoutSection>URL 2</LayoutSection>
-  </LayoutPreview>
-);
-
-const OneTwoHorizontalSplitLayout = ({ onClick }: ILayoutProps) => (
-  <LayoutPreview onClick={onClick} templateColumns="1fr 2fr" templateRows="1fr">
-    <LayoutSection>URL 1</LayoutSection>
-    <LayoutSection>URL 2</LayoutSection>
-  </LayoutPreview>
-);
-
-const TwoOneVerticalSplitLayout = ({ onClick }: ILayoutProps) => (
-  <LayoutPreview onClick={onClick} templateColumns="1fr" templateRows="2fr 1fr">
-    <LayoutSection>URL 1</LayoutSection>
-    <LayoutSection>URL 2</LayoutSection>
-  </LayoutPreview>
-);
-
-const TwoOneHorizontalSplitLayout = ({ onClick }: ILayoutProps) => (
-  <LayoutPreview onClick={onClick} templateColumns="2fr 1fr" templateRows="1fr">
-    <LayoutSection>URL 1</LayoutSection>
-    <LayoutSection>URL 2</LayoutSection>
-  </LayoutPreview>
-);
-
-const OneOneTwoVerticalSplitLayout = ({ onClick }: ILayoutProps) => (
+const SingleLayout = ({ onClick, clickIndicator }: ILayoutProps) => (
   <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
+    onClick={onClick}
+    templateColumns="1fr"
+    templateRows="1fr"
+  >
+    <LayoutSection>URL 1</LayoutSection>
+  </LayoutPreview>
+);
+
+const EvenVerticalSplitLayout = ({ onClick, clickIndicator }: ILayoutProps) => (
+  <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
+    onClick={onClick}
+    templateColumns="1fr"
+    templateRows="1fr 1fr"
+  >
+    <LayoutSection>URL 1</LayoutSection>
+    <LayoutSection>URL 2</LayoutSection>
+  </LayoutPreview>
+);
+
+const EvenHorizontalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
+  <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
+    onClick={onClick}
+    templateColumns="1fr 1fr"
+    templateRows="1fr"
+  >
+    <LayoutSection>URL 1</LayoutSection>
+    <LayoutSection>URL 2</LayoutSection>
+  </LayoutPreview>
+);
+
+const OneTwoVerticalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
+  <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
+    onClick={onClick}
+    templateColumns="1fr"
+    templateRows="1fr 2fr"
+  >
+    <LayoutSection>URL 1</LayoutSection>
+    <LayoutSection>URL 2</LayoutSection>
+  </LayoutPreview>
+);
+
+const OneTwoHorizontalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
+  <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
+    onClick={onClick}
+    templateColumns="1fr 2fr"
+    templateRows="1fr"
+  >
+    <LayoutSection>URL 1</LayoutSection>
+    <LayoutSection>URL 2</LayoutSection>
+  </LayoutPreview>
+);
+
+const TwoOneVerticalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
+  <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
+    onClick={onClick}
+    templateColumns="1fr"
+    templateRows="2fr 1fr"
+  >
+    <LayoutSection>URL 1</LayoutSection>
+    <LayoutSection>URL 2</LayoutSection>
+  </LayoutPreview>
+);
+
+const TwoOneHorizontalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
+  <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
+    onClick={onClick}
+    templateColumns="2fr 1fr"
+    templateRows="1fr"
+  >
+    <LayoutSection>URL 1</LayoutSection>
+    <LayoutSection>URL 2</LayoutSection>
+  </LayoutPreview>
+);
+
+const OneOneTwoVerticalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
+  <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
     onClick={onClick}
     templateColumns="1fr 1fr"
     templateRows="1fr 1fr"
@@ -75,8 +130,12 @@ const OneOneTwoVerticalSplitLayout = ({ onClick }: ILayoutProps) => (
   </LayoutPreview>
 );
 
-const OneOneTwoHorizontalSplitLayout = ({ onClick }: ILayoutProps) => (
+const OneOneTwoHorizontalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
   <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
     onClick={onClick}
     templateColumns="1fr 1fr"
     templateRows="1fr 1fr"
@@ -91,8 +150,12 @@ const OneOneTwoHorizontalSplitLayout = ({ onClick }: ILayoutProps) => (
   </LayoutPreview>
 );
 
-const TwoOneOneVerticalSplitLayout = ({ onClick }: ILayoutProps) => (
+const TwoOneOneVerticalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
   <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
     onClick={onClick}
     templateColumns="1fr 1fr"
     templateRows="1fr 1fr"
@@ -105,8 +168,12 @@ const TwoOneOneVerticalSplitLayout = ({ onClick }: ILayoutProps) => (
   </LayoutPreview>
 );
 
-const TwoOneOneHorizontalSplitLayout = ({ onClick }: ILayoutProps) => (
+const TwoOneOneHorizontalSplitLayout = ({
+  onClick,
+  clickIndicator,
+}: ILayoutProps) => (
   <LayoutPreview
+    clickIndicator={clickIndicator ? 1 : 0}
     onClick={onClick}
     templateColumns="1fr 1fr"
     templateRows="1fr 1fr"
@@ -121,7 +188,7 @@ const TwoOneOneHorizontalSplitLayout = ({ onClick }: ILayoutProps) => (
 
 interface IProps {
   layout: ChannelLayout;
-  onChange: (layout: ChannelLayout) => void;
+  onChange: (layout: ChannelLayout, urlSlotCount: number) => void;
   children?: React.ReactNode;
 }
 
@@ -129,8 +196,14 @@ interface IState {
   active: boolean;
 }
 
+interface IChannelLayout {
+  Component: React.SFC<any>;
+  value: ChannelLayout;
+  urlSlotCount: number;
+}
+
 interface IChannelLayoutMapping {
-  [layout: string]: { Component: React.SFC<any>; value: ChannelLayout };
+  [layout: string]: IChannelLayout;
 }
 
 class ChannelLayoutPicker extends React.Component<IProps, IState> {
@@ -139,48 +212,61 @@ class ChannelLayoutPicker extends React.Component<IProps, IState> {
   };
 
   private channelLayouts: IChannelLayoutMapping = {
-    single: { Component: SingleLayout, value: 'single' },
+    single: { Component: SingleLayout, value: 'single', urlSlotCount: 1 },
     '1-1-vertical': {
       Component: EvenVerticalSplitLayout,
       value: '1-1-vertical',
+      urlSlotCount: 2,
     },
     '1-1-horizontal': {
       Component: EvenHorizontalSplitLayout,
       value: '1-1-horizontal',
+      urlSlotCount: 2,
     },
     '1-2-vertical': {
       Component: OneTwoVerticalSplitLayout,
       value: '1-2-vertical',
+      urlSlotCount: 2,
     },
     '1-2-horizontal': {
       Component: OneTwoHorizontalSplitLayout,
       value: '1-2-horizontal',
+      urlSlotCount: 2,
     },
     '2-1-vertical': {
       Component: TwoOneVerticalSplitLayout,
       value: '2-1-vertical',
+      urlSlotCount: 2,
     },
     '2-1-horizontal': {
       Component: TwoOneHorizontalSplitLayout,
       value: '2-1-horizontal',
+      urlSlotCount: 2,
     },
     '2-1-1-vertical': {
       Component: OneOneTwoVerticalSplitLayout,
       value: '2-1-1-vertical',
+      urlSlotCount: 3,
     },
     '2-1-1-horizontal': {
       Component: OneOneTwoHorizontalSplitLayout,
       value: '2-1-1-horizontal',
+      urlSlotCount: 3,
     },
     '1-1-2-vertical': {
       Component: TwoOneOneVerticalSplitLayout,
       value: '1-1-2-vertical',
+      urlSlotCount: 3,
     },
     '1-1-2-horizontal': {
       Component: TwoOneOneHorizontalSplitLayout,
       value: '1-1-2-horizontal',
+      urlSlotCount: 3,
     },
   };
+
+  public togglePicker = () =>
+    this.setState(state => ({ active: !state.active }));
 
   public render() {
     const { layout, onChange, children } = this.props;
@@ -191,29 +277,37 @@ class ChannelLayoutPicker extends React.Component<IProps, IState> {
       Object.keys(this.channelLayouts).map(key => this.channelLayouts[key]),
       3,
     );
-    const onClick = (value: ChannelLayout) => () => onChange(value);
 
     return (
       <>
         <label className="label">Channel Layout</label>
         <Row>
           <Column width={4}>
-            <ActiveLayoutComponent />
+            <ActiveLayoutComponent clickIndicator onClick={this.togglePicker} />
           </Column>
           <Column>{children}</Column>
         </Row>
-        <Well>
-          <label className="label">Select A Layout</label>
-          {rows.map((row, rowIndex) => (
-            <Row key={rowIndex}>
-              {row.map(({ Component, value }, layoutIndex) => (
-                <Column key={layoutIndex} width={4}>
-                  <Component onClick={onClick(value)} />
-                </Column>
-              ))}
-            </Row>
-          ))}
-        </Well>
+        {active && (
+          <Well>
+            <label className="label">Select A Layout</label>
+            {rows.map((row, rowIndex) => (
+              <Row key={rowIndex}>
+                {row.map(({ Component, value, urlSlotCount }, layoutIndex) => {
+                  const onClick = () => {
+                    this.togglePicker();
+                    onChange(value, urlSlotCount);
+                  };
+
+                  return (
+                    <Column key={layoutIndex} width={4}>
+                      <Component onClick={onClick} />
+                    </Column>
+                  );
+                })}
+              </Row>
+            ))}
+          </Well>
+        )}
       </>
     );
   }
@@ -241,6 +335,7 @@ const LayoutSection = styled.div<{
 `;
 
 const LayoutPreview = styled.div<{
+  clickIndicator?: number;
   templateColumns: string;
   templateRows: string;
 }>`
@@ -251,6 +346,7 @@ const LayoutPreview = styled.div<{
   border-radius: 4px;
   height: 200px;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     box-shadow: 0 0 5px ${COLORS.green};
@@ -261,6 +357,23 @@ const LayoutPreview = styled.div<{
       background: ${COLORS.greenTint};
       color: ${COLORS.green};
     }
+
+    ${props =>
+      props.clickIndicator &&
+      `
+      ::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px;
+        border-color: transparent ${COLORS.green} ${COLORS.green} transparent;
+      }
+      `};
   }
 `;
 

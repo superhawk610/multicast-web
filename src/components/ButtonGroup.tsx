@@ -20,7 +20,7 @@ interface IProps {
 
 const ButtonGroup = ({ buttons, value, onChange }: IProps) => (
   <div className="buttons has-addons">
-    {buttons.map(({ text, theme = THEMES.none, value: buttonValue }, index) => {
+    {buttons.map(({ text, theme = THEMES.dark, value: buttonValue }, index) => {
       const active = buttonValue === value;
       const onClick = () => onChange(buttonValue);
 

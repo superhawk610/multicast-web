@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
 import { Themes, THEMES } from '../constants';
 
@@ -18,7 +19,7 @@ interface IProps {
   theme?: MessageTheme;
   style?: MessageStyle;
   heading?: string;
-  text: string;
+  text: React.ReactNode;
 }
 
 const Message = ({
@@ -33,8 +34,29 @@ const Message = ({
         <p>{heading}</p>
       </div>
     )}
-    <div className="message-body">{text}</div>
+    <Body className="message-body">{text}</Body>
   </article>
 );
+
+const Body = styled.div`
+  a {
+    display: inline-block;
+    position: relative;
+    font-weight: 700;
+    text-decoration: none !important;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      background: currentColor;
+      bottom: 1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+    }
+  }
+`;
 
 export default Message;

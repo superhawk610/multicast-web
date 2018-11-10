@@ -41,6 +41,20 @@ export namespace Themes {
   export type danger = 'is-danger';
 }
 
+export type Theme =
+  | Themes.none
+  | Themes.white
+  | Themes.light
+  | Themes.dark
+  | Themes.black
+  | Themes.text
+  | Themes.primary
+  | Themes.link
+  | Themes.info
+  | Themes.success
+  | Themes.warning
+  | Themes.danger;
+
 export const THEMES: {
   none: Themes.none;
   white: Themes.white;

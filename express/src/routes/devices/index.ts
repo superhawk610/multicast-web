@@ -1,7 +1,14 @@
-import { Request, Response, Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
+
 import Device from '../../models/device.model';
 
 const router = Router();
+
+interface IDeviceRequest {
+  model: Device;
+}
+
+type DeviceRequest = IDeviceRequest & Request;
 
 router
   .route('/')
@@ -12,15 +19,21 @@ router
 
 router
   .route('/:id')
-  .get((req: Request, res: Response) =>
-    Device.findById(req.params.id).then(device => res.json(device.toJSON())),
+  .all((req: DeviceRequest, res: Response, next: NextFunction) =>
+    Device.findById(req.params.id).then(device => {
+      if (!device) return res.sendStatus(400);
+      req.model = device;
+      return next();
+    }),
   )
-  .patch((req: Request, res: Response) =>
-    Device.findById(req.params.id).then(device =>
-      device
-        .update(req.body)
-        .then(updatedDevice => res.json(updatedDevice.toJSON())),
-    ),
+  .get((req: DeviceRequest, res: Response) => res.json(req.model.toJSON()))
+  .patch((req: DeviceRequest, res: Response) =>
+    req.model
+      .update(req.body)
+      .then(updatedDevice => res.json(updatedDevice.toJSON())),
+  )
+  .delete((req: DeviceRequest, res: Response) =>
+    req.model.destroy().then(() => res.sendStatus(204)),
   );
 
 export default router;

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import InputError from './InputError';
+
 import Icon from 'react-icons-kit';
 
 import { Themes, THEMES } from '../constants';
@@ -16,6 +18,7 @@ type InputTheme =
 interface IProps {
   label?: string;
   placeholder?: string;
+  error?: string | null;
   name?: string;
   value?: string | number;
   onChange?: (value: string) => void;
@@ -34,6 +37,7 @@ const handleChange = (onChange: (value: string) => void) => ({
 const Input = ({
   label,
   placeholder,
+  error,
   name,
   value,
   onChange,
@@ -50,12 +54,16 @@ const Input = ({
 
   return (
     <div className="field">
-      {label && <label className="label">{label}</label>}
+      {label && (
+        <label className={`label ${error ? 'has-text-danger' : ''}`}>
+          {label}
+        </label>
+      )}
       <p
         className={`control ${loadingClass} ${leftIconClass} ${rightIconClass}`}
       >
         <input
-          className={`input ${theme}`}
+          className={`input ${error ? THEMES.danger : theme}`}
           placeholder={placeholder}
           disabled={disabled}
           name={name}
@@ -74,6 +82,7 @@ const Input = ({
           </span>
         )}
       </p>
+      {error && <InputError>{error}</InputError>}
     </div>
   );
 };

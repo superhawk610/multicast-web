@@ -6,7 +6,6 @@ import {
   HasMany,
   Sequelize,
   AutoIncrement,
-  Is,
 } from 'sequelize-typescript';
 
 import Device from './device.model';
@@ -26,10 +25,6 @@ class Channel extends Model<Channel> {
 
   @Column
   public duration: number;
-
-  @Is(/0|90|180|270/)
-  @Column
-  public rotation: number;
 
   @Column(Sequelize.STRING)
   public get urls(): string[] {

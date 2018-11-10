@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import InputError from './InputError';
+
 import Icon from 'react-icons-kit';
 
 import { Themes, THEMES } from '../constants';
@@ -26,6 +28,7 @@ interface IProps {
   block?: boolean;
   label?: string;
   placeholder?: string;
+  error?: string | null;
   name?: string;
   value?: OptionValue;
   onChange?: (value: OptionValue) => void;
@@ -45,6 +48,7 @@ const Input = ({
   block,
   label,
   placeholder,
+  error,
   name,
   value,
   onChange,
@@ -93,6 +97,7 @@ const Input = ({
           </span>
         )}
       </div>
+      {error && <InputError>{error}</InputError>}
     </div>
   );
 };

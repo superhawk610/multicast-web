@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Page from '../components/Page';
 import { Heading2 } from '../components/Heading';
 import Host from '../components/Host';
+import CornerCat from '../components/CornerCat';
 
 import { COLORS } from '../constants';
 
@@ -64,6 +65,7 @@ class Hosts extends React.Component<Props> {
             <Link to="/configuration">Register One Here</Link>
           </div>
         )}
+        <CornerCat in={loading ? false : hosts.length > 0 ? false : true} />
       </Page>
     );
   }

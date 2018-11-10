@@ -45,8 +45,8 @@ class AlertForm extends React.Component<Props, IState> {
   };
 
   private themeButtons: IButton[] = [
-    { text: 'None', value: '', theme: THEMES.dark },
-    { text: 'Dark', value: THEMES.dark, theme: THEMES.dark },
+    { text: 'None', value: '' },
+    { text: 'Dark', value: THEMES.dark },
     { text: 'Primary', value: THEMES.primary, theme: THEMES.primary },
     { text: 'Link', value: THEMES.link, theme: THEMES.link },
     { text: 'Info', value: THEMES.info, theme: THEMES.info },
@@ -56,17 +56,17 @@ class AlertForm extends React.Component<Props, IState> {
   ];
 
   private styleButtons: IButton[] = [
-    { text: 'Bold', value: 'bold', theme: THEMES.dark },
-    { text: 'Minimal', value: 'minimal', theme: THEMES.dark },
+    { text: 'Bold', value: 'bold' },
+    { text: 'Minimal', value: 'minimal' },
   ];
 
   private durationButtons: IButton[] = [
-    { text: '1m', value: 60 * 1000, theme: THEMES.dark },
-    { text: '5m', value: 5 * 60 * 1000, theme: THEMES.dark },
-    { text: '30m', value: 30 * 60 * 1000, theme: THEMES.dark },
-    { text: '1h', value: 60 * 60 * 1000, theme: THEMES.dark },
-    { text: '12h', value: 12 * 60 * 60 * 1000, theme: THEMES.dark },
-    { text: '24h', value: 24 * 60 * 60 * 1000, theme: THEMES.dark },
+    { text: '1m', value: 60 * 1000 },
+    { text: '5m', value: 5 * 60 * 1000 },
+    { text: '30m', value: 30 * 60 * 1000 },
+    { text: '1h', value: 60 * 60 * 1000 },
+    { text: '12h', value: 12 * 60 * 60 * 1000 },
+    { text: '24h', value: 24 * 60 * 60 * 1000 },
   ];
 
   public onDeviceChange = (deviceId: string) => this.setState({ deviceId });

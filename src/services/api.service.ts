@@ -24,6 +24,10 @@ const api = {
       },
       body: JSON.stringify(body),
     }).then(res => res.json()),
+  delete: (path: string) =>
+    fetch(withApi(path), {
+      method: 'delete',
+    }),
   handleRequest: ({ path, body, method = 'get' }: IAPI) => {
     switch (method) {
       case 'get':
@@ -32,6 +36,8 @@ const api = {
         return api.post(path, body);
       case 'patch':
         return api.patch(path, body);
+      case 'delete':
+        return api.delete(path);
       default:
         return Promise.reject(new Error(`Unrecognized HTTP method ${method}`));
     }

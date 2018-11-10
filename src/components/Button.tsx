@@ -52,7 +52,7 @@ const Button = ({
 
   return (
     <button
-      type={submit ? 'button' : 'submit'}
+      type={submit ? 'submit' : 'button'}
       className={className}
       disabled={disabled}
       onClick={onClick}

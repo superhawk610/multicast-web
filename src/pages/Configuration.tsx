@@ -8,7 +8,10 @@ import StatusLight from '../components/StatusLight';
 
 import RegisterHostForm from '../forms/RegisterHostForm';
 
+import { THEMES } from '../constants';
+
 import { IHost, getHosts } from '../reducers/hosts.reducer';
+import { DialogResultAction } from '../reducers/dialog.reducer';
 import { IApplicationState } from '../reducers';
 import * as actions from '../actions';
 
@@ -20,6 +23,11 @@ interface IStateProps {
 
 interface IDispatchProps {
   fetchHosts: () => void;
+  showDialog: (
+    heading: string,
+    message: string,
+    onConfirmAction: DialogResultAction,
+  ) => void;
 }
 
 type Props = IStateProps & IDispatchProps;
@@ -29,8 +37,21 @@ class Configuration extends React.Component<Props> {
     this.props.fetchHosts();
   }
 
+  public onRemoveClick = (host: IHost) => {
+    this.props.showDialog(
+      'Are you sure?',
+      'This action CANNOT be undone.',
+      actions.deleteHost(host.id),
+    );
+  };
+
   public render() {
     const { loading, error, hosts } = this.props;
+
+    const actionForRow = (host: IHost) => ({
+      text: 'Remove',
+      onClick: this.onRemoveClick,
+    });
 
     return (
       <Page heading="Configuration" subheading="Existing Deployments">
@@ -43,6 +64,8 @@ class Configuration extends React.Component<Props> {
           renderRow={{
             status: (host: IHost) => <StatusLight status={host.status} />,
           }}
+          actionForRow={actionForRow}
+          actionTheme={THEMES.danger}
           noRecordsFoundText="No Existing Deployments."
         />
         <Heading2>Register New Deployment</Heading2>
@@ -60,6 +83,7 @@ const mapStateToProps = (state: IApplicationState) => ({
 
 const mapDispatchToProps = {
   fetchHosts: actions.fetchHosts,
+  showDialog: actions.showDialog,
 };
 
 export default connect(

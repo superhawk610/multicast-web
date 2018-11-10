@@ -3,11 +3,11 @@ import startCase = require('lodash.startcase');
 import styled from 'styled-components';
 
 import Button from './Button';
-import { Heading2 } from './Heading';
+import ErrorDisplay from './ErrorDisplay';
 
 import { chevronRight } from 'react-icons-kit/feather/chevronRight';
 
-import { COLORS, THEMES } from '../constants';
+import { COLORS, THEMES, Theme } from '../constants';
 
 interface ILookup {
   [key: string]: string | number | null;
@@ -33,6 +33,7 @@ interface IProps<T> {
   renderRow?: IRenderMapping<T>;
   actionForRow?: (row: T) => IAction<T>;
   actionHeader?: React.ReactNode;
+  actionTheme?: Theme;
   noRecordsFoundText?: string;
 }
 
@@ -47,6 +48,7 @@ class Table<T> extends React.Component<IProps<T>> {
       renderRow = {},
       actionForRow,
       actionHeader,
+      actionTheme = THEMES.success,
       noRecordsFoundText = 'No Records Found.',
     } = this.props;
 
@@ -69,11 +71,8 @@ class Table<T> extends React.Component<IProps<T>> {
         <tbody>
           {error ? (
             <tr>
-              <TableCell colSpan={42} style={{ padding: '25px' }}>
-                <Heading2 color={COLORS.red}>
-                  Oops! We encountered an error.
-                </Heading2>
-                {error.message}
+              <TableCell colSpan={42}>
+                <ErrorDisplay error={error} />
               </TableCell>
             </tr>
           ) : loading ? (
@@ -97,21 +96,21 @@ class Table<T> extends React.Component<IProps<T>> {
                     </TableCell>
                   ))}
                   {action && (
-                    <td style={{ textAlign: 'right' }}>
+                    <ButtonCell>
                       <Button
-                        theme={THEMES.success}
+                        theme={actionTheme}
                         text={action.text}
                         rightIcon={chevronRight}
                         onClick={onClick}
                       />
-                    </td>
+                    </ButtonCell>
                   )}
                 </tr>
               );
             })
           ) : (
             <tr>
-              <TableCell colSpan={42}>{noRecordsFoundText}</TableCell>
+              <EmptyTableCell colSpan={42}>{noRecordsFoundText}</EmptyTableCell>
             </tr>
           )}
         </tbody>
@@ -126,6 +125,22 @@ const HeaderCell = styled.th`
 
 const TableCell = styled.td`
   vertical-align: middle !important;
+`;
+
+const EmptyTableCell = styled.td`
+  padding: 1.65em !important;
+  vertical-align: middle !important;
+  color: ${COLORS.greyLight};
+`;
+
+const ButtonCell = styled.td`
+  text-align: right;
+
+  > .button {
+    height: auto !important;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
 `;
 
 export default Table;

@@ -8,6 +8,10 @@ declare module 'react-icons-kit/feather/chevronDown';
 
 declare module 'react-icons-kit/feather/chevronRight';
 
+declare module 'react-icons-kit/feather/chevronLeft';
+
 declare module 'react-icons-kit/feather/refreshCw';
 
 declare module 'react-icons-kit/feather/check';
+
+declare module 'react-icons-kit/feather/alertCircle';

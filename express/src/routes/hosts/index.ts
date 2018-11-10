@@ -1,7 +1,14 @@
-import { Request, Response, Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
+
 import Host from '../../models/host.model';
 
 const router = Router();
+
+interface IHostRequest {
+  model: Host;
+}
+
+type HostRequest = IHostRequest & Request;
 
 router
   .route('/')
@@ -12,13 +19,21 @@ router
 
 router
   .route('/:id')
-  .get((req: Request, res: Response) =>
-    Host.findById(req.params.id).then(host => res.json(host.toJSON())),
+  .all((req: HostRequest, res: Response, next: NextFunction) =>
+    Host.findById(req.params.id).then(host => {
+      if (!host) return res.sendStatus(400);
+      req.model = host;
+      return next();
+    }),
   )
-  .patch((req: Request, res: Response) =>
-    Host.findById(req.params.id).then(host =>
-      host.update(req.body).then(updatedHost => res.json(updatedHost.toJSON())),
-    ),
+  .get((req: HostRequest, res: Response) => res.json(req.model.toJSON()))
+  .patch((req: HostRequest, res: Response) =>
+    req.model
+      .update(req.body)
+      .then(updatedHost => res.json(updatedHost.toJSON())),
+  )
+  .delete((req: HostRequest, res: Response) =>
+    req.model.destroy().then(() => res.sendStatus(204)),
   );
 
 export default router;
