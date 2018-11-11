@@ -4,7 +4,13 @@ import got = require('got');
 
 import Probe from '../../models/probe.model';
 
+import { SANDBOX } from '../../lib/config';
+
 const router = Router();
+
+router.get('/check-sandbox', (_, res: Response) => {
+  res.json({ sandbox: SANDBOX });
+});
 
 router.get(
   '/check-host-validity',

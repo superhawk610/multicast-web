@@ -34,6 +34,9 @@ export const CHECK_HOST_VALIDITY_BEGIN = 'CHECK_HOST_VALIDITY_BEGIN';
 export const CHECK_HOST_VALIDITY_SUCCESS = 'CHECK_HOST_VALIDITY_SUCCESS';
 export const CHECK_HOST_VALIDITY_ERROR = 'CHECK_HOST_VALIDITY_ERROR';
 export const CLEAR_HOST_VALIDITY = 'CLEAR_HOST_VALIDITY';
+export const CHECK_SANDBOX_BEGIN = 'CHECK_SANDBOX_BEGIN';
+export const CHECK_SANDBOX_SUCCESS = 'CHECK_SANDBOX_SUCCESS';
+export const CHECK_SANDBOX_ERROR = 'CHECK_SANDBOX_ERROR';
 
 // dialog
 export const DIALOG_SHOW = 'DIALOG_SHOW';
@@ -119,6 +122,14 @@ export const checkHostValidity = (address: string): UtilAction => ({
 export const clearHostValidity = (): UtilAction => ({
   type: CLEAR_HOST_VALIDITY,
   utilKey: 'hostIsValid',
+});
+
+export const checkSandbox = (): UtilAction => ({
+  type: CHECK_SANDBOX_BEGIN,
+  utilKey: 'isSandbox',
+  api: {
+    path: 'utils/check-sandbox',
+  },
 });
 
 //

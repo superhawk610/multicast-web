@@ -15,3 +15,5 @@ declare module 'react-icons-kit/feather/refreshCw';
 declare module 'react-icons-kit/feather/check';
 
 declare module 'react-icons-kit/feather/alertCircle';
+
+declare module 'react-icons-kit/feather/alertTriangle';

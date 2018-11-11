@@ -4,6 +4,7 @@ import { setConfig, hot } from 'react-hot-loader';
 import styled from 'styled-components';
 
 import Sidebar from './Sidebar';
+import SandboxWarning from './SandboxWarning';
 import ConfirmDialog from './ConfirmDialog';
 
 import NotFound from '../pages/NotFound';
@@ -19,6 +20,7 @@ setConfig({ logLevel: 'disable-all-errors' });
 const App = () => (
   <>
     <Sidebar />
+    <SandboxWarning />
     <ConfirmDialog />
     <Constraint>
       <Switch>

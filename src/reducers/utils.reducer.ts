@@ -4,6 +4,9 @@ import {
   CHECK_HOST_VALIDITY_SUCCESS,
   CHECK_HOST_VALIDITY_ERROR,
   CLEAR_HOST_VALIDITY,
+  CHECK_SANDBOX_BEGIN,
+  CHECK_SANDBOX_SUCCESS,
+  CHECK_SANDBOX_ERROR,
 } from '../actions';
 
 import { APIAction } from '../types';
@@ -27,7 +30,6 @@ interface IUtility {
 }
 
 export interface IUtilsState {
-  hostIsValid: IUtility;
   [utilKey: string]: IUtility;
 }
 
@@ -37,22 +39,23 @@ const initialUtilityState: IUtility = {
   response: null,
 };
 
-const initialState: IUtilsState = {
-  hostIsValid: { ...initialUtilityState },
-};
+const initialState: IUtilsState = {};
 
 const reducer = (state: IUtilsState = initialState, action: UtilAction) => {
   switch (action.type) {
-    case CHECK_HOST_VALIDITY_BEGIN: {
+    case CHECK_HOST_VALIDITY_BEGIN:
+    case CHECK_SANDBOX_BEGIN: {
       const { utilKey } = action;
 
       return produce(state, draftState => {
+        draftState[utilKey] = initialUtilityState;
         draftState[utilKey].loading = true;
         draftState[utilKey].error = null;
       });
     }
 
-    case CHECK_HOST_VALIDITY_SUCCESS: {
+    case CHECK_HOST_VALIDITY_SUCCESS:
+    case CHECK_SANDBOX_SUCCESS: {
       const {
         utilKey,
         api: { response },
@@ -64,7 +67,8 @@ const reducer = (state: IUtilsState = initialState, action: UtilAction) => {
       });
     }
 
-    case CHECK_HOST_VALIDITY_ERROR: {
+    case CHECK_HOST_VALIDITY_ERROR:
+    case CHECK_SANDBOX_ERROR: {
       const {
         utilKey,
         api: { error },
@@ -100,6 +104,10 @@ export const getUtilResponse = (
   state: IApplicationState,
   utilKey: string,
   defaultValue: any,
-) => state.utils[utilKey].response || defaultValue;
+) => {
+  const util = state.utils[utilKey] || {};
+
+  return util.response || defaultValue;
+};
 
 export default reducer;

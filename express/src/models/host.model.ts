@@ -14,7 +14,14 @@ class Host extends Model<Host> {
   public id: number;
 
   @Column
-  public address: string;
+  public get address(): string {
+    return this.getDataValue('address');
+  }
+
+  public set address(value: string) {
+    // trim trailing slash if present
+    this.setDataValue('address', value.replace(/\/$/, ''));
+  }
 
   @Column
   public nickname: string;
